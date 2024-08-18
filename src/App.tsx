@@ -1,35 +1,35 @@
+import { TextField } from './components/text-field/component'
+import { Tasks } from './components/tasks/components'
+import { Task } from './components/task/component'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [ tasks, setTasks ] = useState<Task[]>([])
+    const [ taskName, setTaskName ] = useState('')
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    function addTask (event: React.KeyboardEvent) {
+        if (event.key === 'Enter') {
+            const task: Task = { name: taskName }
+
+            tasks.unshift(task)
+
+            setTasks(tasks)
+            setTaskName('')
+        }
+    }
+
+    return (
+        <>
+            <TextField
+                value={taskName}
+                onKeyDown={addTask}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaskName(event.target.value)}
+                emptyText='What needs to be done?'
+                autoFocus={true}
+            />
+            <Tasks tasks={tasks}></Tasks>
+        </>
+    )
 }
 
 export default App
