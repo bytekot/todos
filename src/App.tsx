@@ -2,6 +2,7 @@ import { TextField } from './components/text-field/component'
 import { Tasks } from './components/tasks/components'
 import { Task } from './components/task/component'
 import { useState } from 'react'
+import styles from './styles.module.scss'
 
 function App() {
     const [ tasks, setTasks ] = useState<Task[]>([])
@@ -27,7 +28,10 @@ function App() {
                 emptyText='What needs to be done?'
                 autoFocus={true}
             />
-            <Tasks tasks={tasks}></Tasks>
+            <Tasks
+                className={styles.tasks}
+                tasks={tasks}>
+            </Tasks>
         </>
     )
 }
