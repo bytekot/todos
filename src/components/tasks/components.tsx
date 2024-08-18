@@ -1,4 +1,4 @@
-import { Task } from '../task/component'
+import { TaskContainer } from '../task/container'
 import { Task as TaskInterface } from '../task/component'
 import styles from './styles.module.scss'
 import classNames from 'classnames'
@@ -11,8 +11,12 @@ interface Tasks {
 export const Tasks = ({ className, tasks }: Tasks) => {
     return (
         <div className={classNames(styles.tasks, className)}>
-            {tasks.map(({ name }, index) =>
-                <Task key={index} name={name} />
+            {tasks.map(({ name, completed }, index) =>
+                <TaskContainer
+                    key={index}
+                    name={name}
+                    completed={completed}
+                />
             )}
         </div>
     )

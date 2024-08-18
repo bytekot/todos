@@ -4,13 +4,13 @@ import { Task } from './components/task/component'
 import { useState } from 'react'
 import styles from './styles.module.scss'
 
-function App() {
+function App () {
     const [ tasks, setTasks ] = useState<Task[]>([])
-    const [ taskName, setTaskName ] = useState('')
+    const [ taskName, setTaskName ] = useState<string>('')
 
     function addTask (event: React.KeyboardEvent) {
         if (event.key === 'Enter') {
-            const task: Task = { name: taskName }
+            const task: Task = { name: taskName, completed: false }
 
             tasks.unshift(task)
 
