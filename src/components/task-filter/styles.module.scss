@@ -1,0 +1,11 @@
+.tab {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.activeTab {
+    border-bottom: 2px solid #000;
+}
