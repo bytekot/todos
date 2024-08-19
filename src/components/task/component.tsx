@@ -1,13 +1,8 @@
+import { Task as TaskInterface } from '../../types'
 import styles from './styles.module.scss'
 import classNames from 'classnames'
 
-export interface Task {
-    id: number
-    name: string
-    completed: boolean
-}
-
-export interface TaskProps extends Task {
+export interface TaskProps extends TaskInterface {
     onClick: (id: number) => void
 }
 

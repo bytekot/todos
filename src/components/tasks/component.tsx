@@ -1,21 +1,21 @@
+import { Task as TaskInterface } from '../../types'
 import { Task } from '../task/component'
-import { Task as TaskInterface } from '../task/component'
 import styles from './styles.module.scss'
 import classNames from 'classnames'
 
-interface Tasks {
+export interface TasksProps {
     tasks: TaskInterface[]
     onClick: (id: number) => void
-    showCompleted: boolean | null
+    completedShown: boolean | null
     className?: string
 }
 
-export const Tasks = ({ className, tasks, onClick, showCompleted }: Tasks) => {
+export const Tasks = ({ className, tasks, onClick, completedShown }: TasksProps) => {
     return (
         <div className={classNames(styles.tasks, className)}>
             {
                 tasks
-                    .filter(task => showCompleted === null || task.completed === showCompleted)
+                    .filter(task => completedShown === null || task.completed === completedShown)
                     .map(({ id, name, completed }) =>
                         <Task
                             key={id}
