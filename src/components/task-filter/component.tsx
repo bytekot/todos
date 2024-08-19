@@ -4,18 +4,30 @@ import classNames from 'classnames'
 
 interface TaskFilterProps {
     onChange: (completed: boolean | null) => void
+    onClearButtonClick: () => void
     activeFilter?: boolean | null
+    className?: string
 }
 
-const FILTER_VALUES = {
+interface FilterValues {
+    [key: string]: boolean | null
+}
+
+const FILTER_VALUES: FilterValues = {
     All: null,
     Active: false,
     Completed: true,
 }
 
-export const TaskFilter = ({ onChange, activeFilter = null }: TaskFilterProps) => {
+export const TaskFilter = ({
+    activeFilter = null,
+    onChange,
+    onClearButtonClick,
+    className,
+}: TaskFilterProps) => {
+
     return (
-        <div>
+        <div className={classNames(styles.taskFilter, className)}>
             {Object.keys(FILTER_VALUES).map((filterName, index) =>
                 <Button
                     key={index}
@@ -27,6 +39,7 @@ export const TaskFilter = ({ onChange, activeFilter = null }: TaskFilterProps) =
                     {filterName}
                 </Button>
             )}
+            <Button className={styles.clearBtn} onClick={onClearButtonClick}>Clear completed</Button>
         </div>
     )
 }

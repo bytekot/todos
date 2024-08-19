@@ -7,7 +7,6 @@ import styles from './styles.module.scss'
 
 function App () {
     const [ tasks, setTasks ] = useState<Task[]>([])
-    const [ filteredTasks, setFilteredTasks ] = useState<Task[]>(tasks)
     const [ activeFilter, setActiveFilter ] = useState<boolean|null>(null)
     const [ taskName, setTaskName ] = useState<string>('')
 
@@ -28,18 +27,11 @@ function App () {
         setTasks([...tasks])
     }
 
-    function setFilter (completed: boolean | null) {
-        setActiveFilter(completed)
-
-        if (completed === null) {
-            setFilteredTasks(tasks)
-
-            return
-        }
-
-        const filteredTasks: Task[] = tasks.filter(task => task.completed === completed)
-
-        setFilteredTasks(filteredTasks)
+    function removeCompleted () {
+        setTasks(tasks
+            .filter(task => !task.completed)
+            .map((task, index) => ({...task, id: index}))
+        )
     }
 
     return (
@@ -52,13 +44,19 @@ function App () {
                 autoFocus={true}
             />
             {tasks.length > 0 
-                && <TaskFilter onChange={setFilter} activeFilter={activeFilter} />
+                && <TaskFilter
+                    className={styles.taskFilter}
+                    onChange={setActiveFilter}
+                    onClearButtonClick={removeCompleted}
+                    activeFilter={activeFilter}
+                />
             }
-            {filteredTasks.length > 0
+            {tasks.length > 0
                 ? <Tasks
                     className={styles.tasks}
-                    tasks={filteredTasks}
+                    tasks={tasks}
                     onClick={toggleCompleted}
+                    showCompleted={activeFilter}
                 />
                 : <div className={styles.emptyText}>To-do list is empty.</div>
             }
