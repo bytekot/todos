@@ -1,21 +1,25 @@
 import styles from './styles.module.scss'
+import classNames from 'classnames'
 
 export interface Task {
+    id: number
     name: string
     completed: boolean
 }
 
 export interface TaskProps extends Task {
-    onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+    onClick: (id: number) => void
 }
 
-export const Task = ({ name, completed, onClick }: TaskProps) => {
+export const Task = ({ id, name, completed, onClick }: TaskProps) => {
     return (
         <div
-            className={styles.task}
-            onClick={onClick}
+            className={classNames(styles.task, {
+                [styles.completed]: completed,
+            })}
+            onClick={() => onClick(id)}
         >
-            {completed ? '+' : '-'} {name}
+            {name}
         </div>
     )
 }
