@@ -18,9 +18,9 @@ export const Tasks = ({ className, tasks, onClick, completedShown }: TasksProps)
     }
 
     return (
-        <div className={classNames(styles.tasks, className)}>
+        <ul className={classNames(styles.tasks, className)}>
             {displayedTasks.length > 0
-                ? tasks
+                ? displayedTasks
                     .map(({ id, description, completed }) =>
                         <Task
                             key={id}
@@ -32,6 +32,6 @@ export const Tasks = ({ className, tasks, onClick, completedShown }: TasksProps)
                     )
                 : <div className={styles.emptyText}>To-do list is empty.</div>
             }
-        </div>
+        </ul>
     )
 }

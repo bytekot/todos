@@ -17,8 +17,11 @@ const taskContextDefaultValue: TaskContextValue = {
 
 export const TaskContext = createContext<TaskContextValue>(taskContextDefaultValue)
 
-export function TaskProvider ({ children }: { children: React.ReactNode }) {
-    const [ tasks, setTasks ] = useState<Task[]>([])
+export function TaskProvider ({defaultTasks = [], children }: { 
+    defaultTasks?: Task[],
+    children: React.ReactNode,
+}) {
+    const [ tasks, setTasks ] = useState<Task[]>(defaultTasks)
 
     const addTask = (description: string) => {
         setTasks([

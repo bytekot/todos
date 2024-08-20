@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import { TaskProvider } from './context'
+import { Task } from './types'
 import { TextFieldContaner } from './components/text-field/container'
 import { TasksContainer } from './components/tasks/container'
 import { TaskFilterContainer } from './components/task-filter/container'
 import styles from './styles.module.scss'
 
-function App () {
+function App ({ tasks }: { tasks?: Task[] }) {
     const [ activeFilter, setActiveFilter ] = useState<boolean|null>(null)
 
     return (
         <div className={styles.app}>
-            <TaskProvider>
+            <TaskProvider defaultTasks={tasks}>
                 <TextFieldContaner
-                    emptyText='What needs to be done? (type and press Enter)'
+                    emptyText='What needs to be done? Type and press Enter.'
                     autoFocus={true}
                 />
                 <TaskFilterContainer

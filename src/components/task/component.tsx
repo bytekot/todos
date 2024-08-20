@@ -8,13 +8,13 @@ export interface TaskProps extends TaskInterface {
 
 export const Task = ({ id, description, completed, onClick }: TaskProps) => {
     return (
-        <div
+        <li
             className={classNames(styles.task, {
                 [styles.completed]: completed,
             })}
             onClick={() => onClick(id)}
         >
             {description}
-        </div>
+        </li>
     )
 }
