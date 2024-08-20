@@ -9,20 +9,22 @@ interface TextFieldContanerProps {
 
 export const TextFieldContaner = (props: TextFieldContanerProps) => {
     const { addTask } = useTasks()
-    const [ taskName, setTaskName ] = useState<string>('')
+    const [ description, setDescription ] = useState<string>('')
 
     function onKeyDown (event: React.KeyboardEvent) {
-        if (event.key === 'Enter') {
-            addTask(taskName)
-            setTaskName('')
+        if (description && event.key === 'Enter') {
+            event.preventDefault()
+
+            addTask(description)
+            setDescription('')
         }
     }
 
     return (
         <TextField
-            value={taskName}
+            value={description}
             onKeyDown={onKeyDown}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTaskName(event.target.value)}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}
             {...props}
         />
     )

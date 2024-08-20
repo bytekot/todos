@@ -8,9 +8,7 @@ interface TaskFilterContainerProps {
 }
 
 export const TaskFilterContainer = (props: TaskFilterContainerProps) => {
-    const { tasks, removeCompleted } = useTasks()
+    const { removeCompleted } = useTasks()
 
-    return (
-        tasks.length > 0 && <TaskFilter onClearButtonClick={removeCompleted} {...props} />
-    )
+    return <TaskFilter onClearButtonClick={removeCompleted} {...props} />
 }

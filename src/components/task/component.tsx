@@ -6,7 +6,7 @@ export interface TaskProps extends TaskInterface {
     onClick: (id: number) => void
 }
 
-export const Task = ({ id, name, completed, onClick }: TaskProps) => {
+export const Task = ({ id, description, completed, onClick }: TaskProps) => {
     return (
         <div
             className={classNames(styles.task, {
@@ -14,7 +14,7 @@ export const Task = ({ id, name, completed, onClick }: TaskProps) => {
             })}
             onClick={() => onClick(id)}
         >
-            {name}
+            {description}
         </div>
     )
 }

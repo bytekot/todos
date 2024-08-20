@@ -3,7 +3,7 @@ import { Task } from './types'
 
 interface TaskContextValue {
     tasks: Task[]
-    addTask: (taskName: string) => void
+    addTask: (description: string) => void
     toggleCompleted: (id: number) => void
     removeCompleted: () => void
 }
@@ -20,12 +20,12 @@ export const TaskContext = createContext<TaskContextValue>(taskContextDefaultVal
 export function TaskProvider ({ children }: { children: React.ReactNode }) {
     const [ tasks, setTasks ] = useState<Task[]>([])
 
-    const addTask = (taskName: string) => {
+    const addTask = (description: string) => {
         setTasks([
             ...tasks,
             {
                 id: tasks.length,
-                name: taskName,
+                description: description,
                 completed: false,
             },
         ])

@@ -11,20 +11,26 @@ export interface TasksProps {
 }
 
 export const Tasks = ({ className, tasks, onClick, completedShown }: TasksProps) => {
+    let displayedTasks = tasks
+
+    if (completedShown !== null) {
+        displayedTasks = tasks.filter(task => task.completed === completedShown)
+    }
+
     return (
         <div className={classNames(styles.tasks, className)}>
-            {
-                tasks
-                    .filter(task => completedShown === null || task.completed === completedShown)
-                    .map(({ id, name, completed }) =>
+            {displayedTasks.length > 0
+                ? tasks
+                    .map(({ id, description, completed }) =>
                         <Task
                             key={id}
                             id={id}
-                            name={name}
+                            description={description}
                             completed={completed}
                             onClick={onClick}
                         />
                     )
+                : <div className={styles.emptyText}>To-do list is empty.</div>
             }
         </div>
     )
