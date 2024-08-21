@@ -5,3 +5,5 @@ A simple task list made with TypeScript, React Hooks and Vite. Covered by tests 
 Run locally with ``npm i && npm start``.
 
 Run tests with ``npm test``.
+
+Demo: https://bytekot.github.io/todos
