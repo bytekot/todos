@@ -15,15 +15,15 @@ function createTask (description: string) {
   fireEvent.keyDown(textField, { key: 'Enter', code: 'Enter' })
 }
 
+const getTaskNodes = () => screen.getAllByRole<HTMLLIElement>('listitem')
+
 
 test('A new task is successfully created.', () => {
   render(<App tasks={mockedTasks} />)
 
   createTask('New task')
 
-  const tasks = screen.getAllByRole<HTMLLIElement>('listitem')
-
-  expect(tasks.length).toBe(4)
+  expect(getTaskNodes().length).toBe(4)
 })
 
 test('An empty task is not created.', () => {
@@ -31,9 +31,7 @@ test('An empty task is not created.', () => {
 
   createTask('')
 
-  const tasks = screen.getAllByRole<HTMLLIElement>('listitem')
-
-  expect(tasks.length).toBe(3)
+  expect(getTaskNodes().length).toBe(3)
 })
 
 test('Completed tasks are successfully deleted on clear button.', () => {
@@ -43,42 +41,25 @@ test('Completed tasks are successfully deleted on clear button.', () => {
 
   fireEvent.click(clearButton)
 
-  const tasks = screen.getAllByRole<HTMLLIElement>('listitem')
-
-  expect(tasks.length).toBe(1)
+  expect(getTaskNodes().length).toBe(1)
 })
 
-test('Filters', () => {
+test('Only active tasks are displayed on the Active tab.', () => {
   render(<App tasks={mockedTasks} />)
 
   const tabActive = screen.getByText('Active')
 
   fireEvent.click(tabActive)
 
-  const tasks = screen.getAllByRole<HTMLLIElement>('listitem')
-
-  expect(tasks.length).toBe(1)
+  expect(getTaskNodes().length).toBe(1)
 })
 
-test('Filter Completed', () => {
+test('Only completed tasks are displayed on the Completed tab.', () => {
   render(<App tasks={mockedTasks} />)
 
   const tabCompleted = screen.getByText('Completed')
 
   fireEvent.click(tabCompleted)
 
-  const tasks = screen.getAllByRole<HTMLLIElement>('listitem')
-
-  expect(tasks.length).toBe(2)
-})
-
-
-test('Change completed', () => {
-  render(<App tasks={mockedTasks} />)
-
-  const activeTask = screen.getAllByRole<HTMLLIElement>('listitem')
-
-  fireEvent.click(activeTask[0])
-
-  // console.log(activeTask[0].className)
+  expect(getTaskNodes().length).toBe(2)
 })

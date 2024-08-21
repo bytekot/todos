@@ -2,12 +2,16 @@
     background-color: inherit;
     border: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
+    letter-spacing: 0.4px;
     padding: 10px;
+    opacity: 0.7;
 }
-
 .activeTab {
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid slateblue;
+    color: slateblue;
+    // font-weight: 500;
+    opacity: 1;
 }
 
 .clearBtn {
@@ -21,8 +25,9 @@
     color: #0f1111;
     height: 30px;
     font-size: 14px;
-    padding: 0 7px;
+    padding: 5px 7px;
     float: right;
+    margin-top: 3px;
 }
 .clearBtn:hover {
     background-image: none;
